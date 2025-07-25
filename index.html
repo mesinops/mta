@@ -1,60 +1,14 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Data Mesin ATM</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data dari Google Sheet</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Data Mesin ATM</h1>
-  <table id="dataTable">
-    <thead>
-      <tr id="headerRow"></tr>
-    </thead>
-    <tbody id="dataBody"></tbody>
-  </table>
-
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbx7qwofGZ0EqYWl_7Qtg5ij2V16nARR-wtdGGD4BC8jo9mv2nqOb10ybHVjNUbX-piF/exec"; // Ganti URL Web App-mu di sini
-
-    fetch(scriptURL)
-      .then(response => response.json())
-      .then(data => {
-        if (!data || data.length === 0) {
-          document.getElementById("dataBody").innerHTML = "<tr><td colspan='100%'>Tidak ada data.</td></tr>";
-          return;
-        }
-
-        // Buat header dari kunci objek pertama
-        const headers = Object.keys(data[0]);
-        const headerRow = document.getElementById("headerRow");
-        headers.forEach(header => {
-          const th = document.createElement("th");
-          th.textContent = header;
-          headerRow.appendChild(th);
-        });
-
-        // Buat baris data
-        const dataBody = document.getElementById("dataBody");
-        data.forEach(row => {
-          const tr = document.createElement("tr");
-          headers.forEach(header => {
-            const td = document.createElement("td");
-            td.textContent = row[header] ?? "";
-            tr.appendChild(td);
-          });
-          dataBody.appendChild(tr);
-        });
-      })
-      .catch(error => {
-        console.error("Gagal memuat data:", error);
-        document.getElementById("dataBody").innerHTML = "<tr><td colspan='100%'>Gagal memuat data.</td></tr>";
-      });
-  </script>
+  <h1>Data Google Sheet</h1>
+  <div id="data-container">Loading...</div>
+  <script src="script.js"></script>
 </body>
 </html>
