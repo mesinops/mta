@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Mesin</title>
+</head>
+<body>
+  <h1>Data Mesin dari Google Sheet</h1>
+  <table border="1" id="data-table">
+    <tr>
+      <th>Nama</th>
+      <th>Umur</th>
+      <th>Kota</th>
+    </tr>
+  </table>
+
+  <script>
+    fetch('https://script.google.com/macros/s/AKfycbweIfIoVPWNtVe75t1mRwXiz53ehCk_Xs62hmJIUhckHaLz6onKo0cRYneXCKzLe50ysg/exec') // ganti dengan link kamu
+      .then(res => res.json())
+      .then(data => {
+        const table = document.getElementById("data-table");
+        data.forEach(item => {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td>${item.nama}</td><td>${item.umur}</td><td>${item.kota}</td>`;
+          table.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Gagal ambil data:', error));
+  </script>
+</body>
+</html>
