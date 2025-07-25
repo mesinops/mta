@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+#data-container {
+  margin-top: 20px;
+}
+.card {
+  background-color: #f3f3f3;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
