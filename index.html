@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Data Mesin</title>
+  <title>Data ATM</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f0f0f0; }
+  </style>
 </head>
 <body>
-  <h1>Data Mesin dari Google Sheet</h1>
-  <table border="1" id="data-table">
-    <tr>
-      <th>Nama</th>
-      <th>Umur</th>
-      <th>Kota</th>
-    </tr>
+  <h2>Data Mesin ATM</h2>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>ID ATM</th>
+        <th>Nama Mesin</th>
+        <th>Lokasi</th>
+        <th>Denom</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
   </table>
 
   <script>
-    fetch('https://script.google.com/macros/s/AKfycbweIfIoVPWNtVe75t1mRwXiz53ehCk_Xs62hmJIUhckHaLz6onKo0cRYneXCKzLe50ysg/exec') // ganti dengan link kamu
-      .then(res => res.json())
+    fetch("https://script.google.com/macros/s/AKfycbweIfIoVPWNtVe75t1mRwXiz53ehCk_Xs62hmJIUhckHaLz6onKo0cRYneXCKzLe50ysg/exec")
+      .then(response => response.json())
       .then(data => {
-        const table = document.getElementById("data-table");
-        data.forEach(item => {
-          const row = document.createElement("tr");
-          row.innerHTML = `<td>${item.nama}</td><td>${item.umur}</td><td>${item.kota}</td>`;
-          table.appendChild(row);
+        const tbody = document.querySelector("#dataTable tbody");
+        data.forEach(row => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${row.idAtm}</td>
+            <td>${row.namaMesin}</td>
+            <td>${row.lokasi}</td>
+            <td>${row.denom}</td>
+          `;
+          tbody.appendChild(tr);
         });
       })
-      .catch(error => console.error('Gagal ambil data:', error));
+      .catch(err => {
+        console.error("Error:", err);
+        alert("Gagal mengambil data.");
+      });
   </script>
 </body>
 </html>
